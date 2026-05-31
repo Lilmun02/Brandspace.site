@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="BRANDSPACE — The publishing platform where brands tell their story, showcase products, and grow their audience. Launching soon.">
+<title>BRANDSPACE — Coming Soon</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Sans:wght@400;500&family=Martian+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{font-family:'Instrument Sans',sans-serif;background:#080808;color:#f7f4ef;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  input{-webkit-appearance:none;border-radius:0;font-family:'Instrument Sans',sans-serif}
+  input::placeholder{color:#555}
+  button{font-family:'Instrument Sans',sans-serif;cursor:pointer}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .fade-up{animation:fadeUp .6s ease both}
+  .d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+  .blink{animation:blink 1.5s infinite}
+  .marquee{animation:marquee 20s linear infinite}
+  ::-webkit-scrollbar{width:5px}
+  ::-webkit-scrollbar-track{background:#111}
+  ::-webkit-scrollbar-thumb{background:#333;border-radius:3px}
+
+  /* TYPOGRAPHY */
+  .font-syne{font-family:'Syne',sans-serif}
+  .font-mono{font-family:'Martian Mono',monospace}
+  .font-inst{font-family:'Instrument Sans',sans-serif}
+
+  /* TOP TICKER */
+  .ticker-wrap{background:#e8400c;padding:.5rem 0;overflow:hidden;white-space:nowrap}
+  .ticker-inner{display:inline-block}
+  .ticker-inner span{font-family:'Martian Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;margin:0 .75rem}
+
+  /* NAV */
+  .nav{padding:1.25rem 2.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
+  .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.3rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.4rem}
+  .nav-dot{width:7px;height:7px;background:#e8400c;border-radius:50%;display:inline-block}
+  .nav-status{font-family:'Martian Mono',monospace;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:#555;display:flex;align-items:center;gap:.4rem}
+  .status-dot{width:6px;height:6px;background:#1a7a5e;border-radius:50%;display:inline-block}
+
+  /* HERO */
+  .hero{max-width:860px;margin:0 auto;padding:5rem 2rem 3rem;text-align:center}
+  .hero-eyebrow{font-family:'Martian Mono',monospace;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#e8400c;margin-bottom:1.25rem;display:flex;align-items:center;justify-content:center;gap:.6rem}
+  .hero-line{width:20px;height:1px;background:#e8400c;display:inline-block}
+  .hero-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.5rem,8vw,6.5rem);line-height:.92;letter-spacing:-.03em;margin-bottom:1.5rem}
+  .hero-h1 .fire{color:#e8400c}
+  .hero-h1 .outline{-webkit-text-stroke:2px #f7f4ef;color:transparent}
+  .hero-sub{font-size:1.05rem;color:#888;line-height:1.75;max-width:560px;margin:0 auto 3rem}
+
+  /* COUNTDOWN */
+  .countdown{display:flex;justify-content:center;margin-bottom:3.5rem}
+  .countdown-inner{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(255,255,255,.08);overflow:hidden;min-width:360px}
+  .cd-block{padding:1.25rem 1.75rem;border-right:1px solid rgba(255,255,255,.08);text-align:center}
+  .cd-block:last-child{border-right:none}
+  .cd-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;letter-spacing:-.04em;line-height:1;color:#f7f4ef}
+  .cd-num.fire{color:#e8400c}
+  .cd-label{font-family:'Martian Mono',monospace;font-size:.5rem;letter-spacing:.18em;color:#555;margin-top:.4rem}
+
+  /* LIVE COUNTER */
+  .counter-wrap{margin-bottom:3rem;display:flex;justify-content:center}
+  .counter-box{display:flex;align-items:center;gap:1.5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:1.25rem 2.5rem}
+  .counter-label{font-family:'Martian Mono',monospace;font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:#666;display:flex;align-items:center;gap:.5rem}
+  .counter-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;letter-spacing:-.04em;color:#f7f4ef;transition:color .3s}
+  .counter-num.pulse{animation:pulse .4s ease}
+  .counter-spots{font-family:'Martian Mono',monospace;font-size:.54rem;letter-spacing:.08em;color:#555}
+
+  /* PROGRESS */
+  .progress-wrap{max-width:520px;margin:0 auto 4rem;padding:0}
+  .progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+  .progress-label{font-family:'Martian Mono',monospace;font-size:.54rem;letter-spacing:.1em;text-transform:uppercase;color:#555}
+  .progress-count{font-family:'Martian Mono',monospace;font-size:.54rem}
+  .progress-bar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+  .progress-fill{height:100%;border-radius:2px;transition:width .6s ease}
+  .progress-note{font-family:'Martian Mono',monospace;font-size:.5rem;color:#555;letter-spacing:.08em;margin-top:.5rem;text-align:center}
+
+  /* FORM */
+  .form-wrap{max-width:480px;margin:0 auto 5rem}
+  .form-tag{font-family:'Martian Mono',monospace;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.9rem;text-align:center}
+  .form-inner{display:flex;flex-direction:column;gap:.65rem}
+  .form-input{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#f7f4ef;padding:.95rem 1.1rem;font-size:.95rem;outline:none;width:100%;transition:border-color .2s;font-family:'Instrument Sans',sans-serif}
+  .form-input:focus{border-color:#e8400c}
+  .form-btn{background:#e8400c;color:white;border:none;padding:1rem;font-family:'Martian Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;transition:background .2s;-webkit-tap-highlight-color:transparent}
+  .form-btn:hover{background:#c83208}
+  .form-note{font-family:'Martian Mono',monospace;font-size:.5rem;letter-spacing:.1em;color:#555;text-align:center}
+  .form-error{font-family:'Martian Mono',monospace;font-size:.56rem;color:#e8400c;letter-spacing:.08em}
+
+  /* SUCCESS */
+  .success-box{max-width:480px;margin:0 auto 5rem;background:rgba(26,122,94,.1);border:1px solid rgba(26,122,94,.3);padding:2.5rem;text-align:center}
+  .success-h{font-family:'Syne',sans-serif;font-weight:700;font-size:1.4rem;margin-bottom:.5rem}
+  .success-p{color:#888;font-size:.85rem;line-height:1.7;margin-bottom:.75rem}
+  .success-tag{font-family:'Martian Mono',monospace;font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:#1a7a5e}
+
+  /* REWARDS */
+  .rewards-section{border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);padding:5rem 2rem;background:rgba(255,255,255,.02)}
+  .section-label{font-family:'Martian Mono',monospace;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:#e8400c;margin-bottom:.75rem}
+  .section-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.03em;line-height:.95}
+  .rewards-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-top:3.5rem}
+  .reward-card{background:#080808;padding:2.5rem;position:relative;overflow:hidden}
+  .reward-card.active{background:rgba(255,255,255,.03)}
+  .reward-top-bar{position:absolute;top:0;left:0;right:0;height:3px}
+  .reward-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem}
+  .reward-badge{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;letter-spacing:-.02em}
+  .reward-sub{font-family:'Martian Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:#555;margin-top:.25rem}
+  .reward-count{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;letter-spacing:-.04em;flex-shrink:0}
+  .reward-list{display:flex;flex-direction:column;gap:.65rem}
+  .reward-item{display:flex;align-items:flex-start;gap:.6rem;font-size:.85rem;color:#aaa;line-height:1.55;font-family:'Instrument Sans',sans-serif}
+  .reward-item.claimed{color:#444;text-decoration:line-through}
+  .reward-dot{font-size:.65rem;margin-top:2px;flex-shrink:0}
+  .reward-full{font-family:'Martian Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:#1a7a5e;margin-top:1.25rem;display:flex;align-items:center;gap:.5rem}
+
+  /* COMPARISON */
+  .compare-section{padding:5rem 2rem}
+  .compare-table{margin-top:0}
+  .compare-head{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-bottom:1px}
+  .compare-head-cell{padding:.9rem 1.25rem;font-family:'Martian Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:#555}
+  .compare-head-cell.bs{background:#e8400c;color:white;text-align:center}
+  .compare-head-cell.other{background:#080808;text-align:center}
+  .compare-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-bottom:1px}
+  .compare-feat{background:rgba(255,255,255,.02);padding:.85rem 1.25rem;font-size:.82rem;color:#aaa;font-family:'Instrument Sans',sans-serif}
+  .compare-cell{padding:.85rem;display:flex;align-items:center;justify-content:center}
+  .compare-cell.bs-col{background:rgba(232,64,12,.06)}
+  .compare-cell.other-col{background:rgba(255,255,255,.02)}
+  .check-bs{color:#e8400c;font-size:.95rem}
+  .check-other{color:#1a7a5e;font-size:.95rem}
+  .check-no{color:#333}
+  .compare-score{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:1px;background:rgba(255,255,255,.06);margin-top:1px}
+  .score-label{background:#080808;padding:.9rem 1.25rem;font-family:'Martian Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#555}
+  .score-cell{padding:.9rem;text-align:center;font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem}
+  .score-cell.bs-score{background:rgba(232,64,12,.08);color:#e8400c}
+  .score-cell.other-score{background:#080808;color:#555}
+
+  /* BOTTOM CTA */
+  .cta-section{background:#e8400c;padding:5rem 2rem;text-align:center}
+  .cta-h{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,4rem);letter-spacing:-.03em;line-height:.92;color:white;margin-bottom:1.25rem}
+  .cta-p{color:rgba(255,255,255,.75);font-size:.95rem;margin-bottom:2rem;line-height:1.7;font-family:'Instrument Sans',sans-serif}
+  .cta-counter{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+  .cta-num{font-family:'Syne',sans-serif;font-weight:800;font-size:3rem;letter-spacing:-.04em;color:white}
+  .cta-tag{font-family:'Martian Mono',monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6);text-align:left;line-height:1.6}
+
+  /* FOOTER */
+  .footer{padding:2rem 2.5rem;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between}
+  .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.05rem;letter-spacing:-.02em;display:flex;align-items:center;gap:.4rem}
+  .footer-copy{font-family:'Martian Mono',monospace;font-size:.52rem;letter-spacing:.1em;color:#555}
+
+  /* MOBILE */
+  @media(max-width:768px){
+    .nav{padding:1rem 1.25rem}
+    .nav-logo{font-size:1.1rem}
+    .nav-status-text{display:none}
+    .hero{padding:3rem 1.25rem 2rem}
+    .hero-line{display:none}
+    .hero-h1{font-size:clamp(2.8rem,12vw,4rem)}
+    .hero-h1 .outline{-webkit-text-stroke:1.5px #f7f4ef}
+    .hero-sub{font-size:.92rem;margin-bottom:2rem}
+    .countdown{margin-bottom:2rem}
+    .countdown-inner{min-width:0;width:100%}
+    .cd-block{padding:.9rem .5rem}
+    .cd-num{font-size:1.8rem}
+    .cd-label{font-size:.45rem}
+    .counter-wrap{margin-bottom:2rem}
+    .counter-box{flex-direction:column;gap:.75rem;padding:1.25rem;text-align:center;width:100%}
+    .counter-spots{text-align:center}
+    .progress-wrap{margin-bottom:2.5rem;padding:0 .25rem}
+    .form-wrap{margin-bottom:3rem;padding:0 .25rem}
+    .rewards-section{padding:3rem 1.25rem}
+    .rewards-grid{grid-template-columns:1fr;gap:1rem;background:transparent}
+    .reward-card{border:1px solid rgba(255,255,255,.06);padding:1.75rem 1.25rem}
+    .reward-badge{font-size:1.2rem}
+    .reward-item{font-size:.8rem}
+    .compare-section{padding:3rem 1.25rem}
+    .compare-table{overflow-x:auto}
+    .compare-mobile{display:flex;flex-direction:column;gap:0}
+    .compare-mobile-row{display:grid;grid-template-columns:1fr repeat(4,36px);gap:.5rem;align-items:center;background:rgba(255,255,255,.02);padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,.04)}
+    .compare-mobile-head{display:grid;grid-template-columns:1fr repeat(4,36px);gap:.5rem;background:#080808;padding:.75rem 1rem;border-bottom:1px solid rgba(255,255,255,.1)}
+    .compare-mobile-feat{font-size:.78rem;color:#aaa;font-family:'Instrument Sans',sans-serif}
+    .compare-mobile-cell{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:4px}
+    .compare-legend{display:flex;flex-wrap:wrap;gap:.75rem;padding:.75rem 0}
+    .compare-legend-item{display:flex;align-items:center;gap:.4rem;font-family:'Martian Mono',monospace;font-size:.5rem}
+    .compare-score-mobile{display:grid;grid-template-columns:1fr repeat(4,36px);gap:.5rem;align-items:center;background:rgba(232,64,12,.04);padding:.75rem 1rem;border:1px solid rgba(232,64,12,.15)}
+    .cta-section{padding:3rem 1.25rem}
+    .cta-h{font-size:clamp(2rem,9vw,3rem)}
+    .cta-p{font-size:.88rem}
+    .cta-num{font-size:2.5rem}
+    .footer{flex-direction:column;gap:.75rem;text-align:center;padding:1.5rem 1.25rem}
+    .footer-logo{justify-content:center}
+    .hide-mobile{display:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-inner marquee">
+    <span style="color:white">LAUNCHING SOON</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">FOUNDING SPOTS FILLING</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">FREE TO JOIN</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">BE FIRST ON THE PLATFORM</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">LAUNCHING SOON</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">FOUNDING SPOTS FILLING</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">FREE TO JOIN</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+    <span style="color:white">BE FIRST ON THE PLATFORM</span>
+    <span style="color:rgba(255,255,255,.35)">✦</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <div class="nav-logo">
+    <span class="nav-dot"></span>
+    BRANDSPACE
+  </div>
+  <div class="nav-status">
+    <span class="status-dot blink"></span>
+    <span class="nav-status-text">LAUNCHING SOON</span>
+    <span class="hide-mobile" style="display:none"></span>
+    <span style="display:none" id="mobile-soon">SOON</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow fade-up">
+    <span class="hero-line hide-mobile"></span>
+    For Brands. By Brands.
+    <span class="hero-line hide-mobile"></span>
+  </div>
+  <h1 class="hero-h1 fade-up d1">
+    THE PLATFORM<br/>
+    <span class="fire">BRANDS</span><br/>
+    <span class="outline">DESERVE.</span>
+  </h1>
+  <p class="hero-sub fade-up d2">
+    One platform to publish your story, showcase your products, and reach buyers who are already looking for brands like yours. Free to start. Built to scale.
+  </p>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown fade-up d2">
+    <div class="countdown-inner">
+      <div class="cd-block">
+        <div class="cd-num" id="cd-d">00</div>
+        <div class="cd-label">DAYS</div>
+      </div>
+      <div class="cd-block">
+        <div class="cd-num" id="cd-h">00</div>
+        <div class="cd-label">HRS</div>
+      </div>
+      <div class="cd-block">
+        <div class="cd-num" id="cd-m">00</div>
+        <div class="cd-label">MIN</div>
+      </div>
+      <div class="cd-block">
+        <div class="cd-num fire" id="cd-s">00</div>
+        <div class="cd-label">SEC</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE COUNTER -->
+  <div class="counter-wrap fade-up d3">
+    <div class="counter-box">
+      <div class="counter-label">
+        <span class="status-dot blink"></span>
+        Live Signups
+      </div>
+      <div class="counter-num" id="signup-count">1</div>
+      <div class="counter-spots" id="spots-left">49 Founding Member spots left</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-wrap fade-up d3">
+    <div class="progress-header">
+      <span class="progress-label" id="progress-label">Progress to 🥇 Founding Member</span>
+      <span class="progress-count" id="progress-count" style="color:#c8a84b">1/50</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill" style="width:2%;background:#c8a84b"></div>
+    </div>
+    <div class="progress-note">Only <strong id="spots-strong" style="color:#c8a84b">49 spots</strong> remaining at this tier</div>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="form-wrap fade-up d4" id="form-section">
+    <div class="form-tag" id="form-tag" style="color:#c8a84b">🥇 Claim Your Founding Member Spot</div>
+    <div class="form-inner">
+      <input class="form-input" type="text" id="input-name" placeholder="Your name" />
+      <input class="form-input" type="email" id="input-email" placeholder="your@email.com" />
+      <div id="form-error" class="form-error" style="display:none"></div>
+      <button class="form-btn" id="submit-btn" onclick="handleSubmit()">
+        Claim Founding Member Spot →
+      </button>
+      <div class="form-note">Free to join · No credit card · Unsubscribe anytime</div>
+    </div>
+  </div>
+
+  <!-- SUCCESS MESSAGE (hidden initially) -->
+  <div class="success-box fade-up" id="success-section" style="display:none">
+    <div style="font-size:2.5rem;margin-bottom:.75rem">🎉</div>
+    <h3 class="success-h">You're on the list!</h3>
+    <p class="success-p" id="success-msg">You've locked in your Founding Member rewards. We'll email you at launch.</p>
+    <div class="success-tag">We'll email you at launch ✓</div>
+  </div>
+</div>
+
+<!-- REWARDS -->
+<div class="rewards-section">
+  <div style="max-width:1000px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div class="section-label">Sign Up Rewards</div>
+      <h2 class="section-title">THE EARLIER YOU JOIN,<br/>THE MORE <span style="color:#e8400c">YOU GET.</span></h2>
+    </div>
+    <div class="rewards-grid">
+      <!-- Founding Member -->
+      <div class="reward-card active" id="reward-founding">
+        <div class="reward-top-bar" style="background:#c8a84b"></div>
+        <div class="reward-header">
+          <div>
+            <div class="reward-badge" style="color:#c8a84b">🥇 Founding Member</div>
+            <div class="reward-sub">First 50 signups</div>
+          </div>
+          <div class="reward-count" id="founding-count" style="color:#c8a84b">49 left</div>
+        </div>
+        <div class="reward-list">
+          <div class="reward-item"><span class="reward-dot" style="color:#c8a84b">✦</span>Lifetime 50% off any paid plan — locked in forever</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#c8a84b">✦</span>Founding Member badge on your brand profile permanently</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#c8a84b">✦</span>Featured in the launch newsletter to our full audience</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#c8a84b">✦</span>3 months free on Growth plan ($147 value)</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#c8a84b">✦</span>Priority placement in the brand directory at launch</div>
+        </div>
+        <div style="margin-top:1.25rem">
+          <div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden">
+            <div id="founding-bar" style="width:0%;height:100%;background:#c8a84b;border-radius:2px;transition:width .6s ease"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Early Adopter -->
+      <div class="reward-card" id="reward-early">
+        <div class="reward-top-bar" style="background:#e8400c"></div>
+        <div class="reward-header">
+          <div>
+            <div class="reward-badge" style="color:#e8400c">⚡ Early Adopter</div>
+            <div class="reward-sub">First 100 signups</div>
+          </div>
+          <div class="reward-count" style="color:#333">100</div>
+        </div>
+        <div class="reward-list">
+          <div class="reward-item"><span class="reward-dot" style="color:#e8400c">✦</span>3 months free on Growth plan ($147 value)</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#e8400c">✦</span>Early Adopter badge on your brand profile</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#e8400c">✦</span>Featured in 'Meet Our Founding Brands' launch article</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#e8400c">✦</span>6 months priority placement in brand directory</div>
+          <div class="reward-item"><span class="reward-dot" style="color:#e8400c">✦</span>First access to all new platform features</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<div class="compare-section">
+  <div style="max-width:960px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:3.5rem">
+      <div class="section-label">Why BRANDSPACE</div>
+      <h2 class="section-title">WE BUILT WHAT<br/><span style="color:#e8400c">OTHERS MISSED.</span></h2>
+    </div>
+
+    <!-- DESKTOP TABLE -->
+    <div class="compare-table" id="desktop-table">
+      <div class="compare-head">
+        <div class="compare-head-cell" style="background:#080808;text-align:left">Feature</div>
+        <div class="compare-head-cell bs">BRANDSPACE</div>
+        <div class="compare-head-cell other">Medium</div>
+        <div class="compare-head-cell other">Substack</div>
+        <div class="compare-head-cell other">Ghost</div>
+      </div>
+      <div id="compare-rows"></div>
+      <div class="compare-score">
+        <div class="score-label">Score</div>
+        <div class="score-cell bs-score">12/12</div>
+        <div class="score-cell other-score">4/12</div>
+        <div class="score-cell other-score">4/12</div>
+        <div class="score-cell other-score">2/12</div>
+      </div>
+    </div>
+
+    <!-- MOBILE TABLE -->
+    <div id="mobile-table" style="display:none">
+      <div class="compare-mobile">
+        <div class="compare-mobile-head">
+          <span class="font-mono" style="font-size:.5rem;color:#555;letter-spacing:.1em;text-transform:uppercase">Feature</span>
+          <div class="compare-mobile-cell" style="background:#e8400c"><span class="font-mono" style="font-size:.45rem;color:white;letter-spacing:.08em">BS</span></div>
+          <div class="compare-mobile-cell"><span class="font-mono" style="font-size:.45rem;color:#555;letter-spacing:.08em">MD</span></div>
+          <div class="compare-mobile-cell"><span class="font-mono" style="font-size:.45rem;color:#555;letter-spacing:.08em">SS</span></div>
+          <div class="compare-mobile-cell"><span class="font-mono" style="font-size:.45rem;color:#555;letter-spacing:.08em">GH</span></div>
+        </div>
+        <div id="mobile-rows"></div>
+        <div class="compare-legend">
+          <div class="compare-legend-item"><span style="color:#e8400c">BS</span><span style="color:#444">= BRANDSPACE</span></div>
+          <div class="compare-legend-item"><span style="color:#555">MD</span><span style="color:#444">= Medium</span></div>
+          <div class="compare-legend-item"><span style="color:#555">SS</span><span style="color:#444">= Substack</span></div>
+          <div class="compare-legend-item"><span style="color:#555">GH</span><span style="color:#444">= Ghost</span></div>
+        </div>
+        <div class="compare-score-mobile">
+          <span class="font-mono" style="font-size:.54rem;color:#555;letter-spacing:.1em;text-transform:uppercase">Score</span>
+          <div class="compare-mobile-cell"><span class="font-syne" style="font-weight:700;font-size:.65rem;color:#e8400c">12/12</span></div>
+          <div class="compare-mobile-cell"><span class="font-syne" style="font-weight:700;font-size:.65rem;color:#333">4/12</span></div>
+          <div class="compare-mobile-cell"><span class="font-syne" style="font-weight:700;font-size:.65rem;color:#333">4/12</span></div>
+          <div class="compare-mobile-cell"><span class="font-syne" style="font-weight:700;font-size:.65rem;color:#333">2/12</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="cta-section">
+  <h2 class="cta-h">DON'T WAIT.<br/>SPOTS ARE FILLING.</h2>
+  <p class="cta-p" id="cta-p">1 brand has already signed up. Only 49 Founding Member spots left.</p>
+  <div class="cta-counter">
+    <div class="cta-num" id="cta-num">1</div>
+    <div class="cta-tag">brands<br/>signed up</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-logo">
+    <span class="nav-dot"></span>
+    BRANDSPACE
+  </div>
+  <div class="footer-copy">© 2026 BRANDSPACE · Launching Soon</div>
+  <div class="footer-copy">Privacy · Terms</div>
+</div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────────────────
+const LAUNCH = new Date(Date.now() + 60*24*60*60*1000);
+let signups = 1;
+
+const COMPARISON = [
+  {f:"E-commerce focused",       bs:1,md:0,ss:0,gh:0},
+  {f:"Product showcase in posts",bs:1,md:0,ss:0,gh:0},
+  {f:"Brand profile pages",      bs:1,md:0,ss:0,gh:0},
+  {f:"Brand discovery directory",bs:1,md:0,ss:0,gh:0},
+  {f:"Verified brand badges",    bs:1,md:0,ss:0,gh:0},
+  {f:"Free to publish",          bs:1,md:1,ss:1,gh:0},
+  {f:"Built-in reader audience", bs:1,md:1,ss:0,gh:0},
+  {f:"Revenue sharing",          bs:1,md:1,ss:0,gh:0},
+  {f:"Brand community & network",bs:1,md:0,ss:0,gh:0},
+  {f:"Launch spotlight feature", bs:1,md:0,ss:0,gh:0},
+  {f:"Product sales integration",bs:1,md:0,ss:0,gh:0},
+  {f:"Newsletter included",      bs:1,md:0,ss:1,gh:1},
+];
+
+// ── BUILD TABLES ─────────────────────────────────────────────────────────────
+function buildTables(){
+  // Desktop
+  const dr = document.getElementById("compare-rows");
+  COMPARISON.forEach(row=>{
+    const vals = [row.bs,row.md,row.ss,row.gh];
+    dr.innerHTML += `<div class="compare-row">
+      <div class="compare-feat">${row.f}</div>
+      ${vals.map((v,i)=>`<div class="compare-cell ${i===0?'bs-col':'other-col'}">
+        ${v?`<span class="${i===0?'check-bs':'check-other'}">✓</span>`:`<span class="check-no">—</span>`}
+      </div>`).join('')}
+    </div>`;
+  });
+  // Mobile
+  const mr = document.getElementById("mobile-rows");
+  COMPARISON.forEach(row=>{
+    const vals = [row.bs,row.md,row.ss,row.gh];
+    mr.innerHTML += `<div class="compare-mobile-row">
+      <span class="compare-mobile-feat">${row.f}</span>
+      ${vals.map((v,i)=>`<div class="compare-mobile-cell" style="${i===0?'background:rgba(232,64,12,.08)':''}">
+        ${v?`<span style="color:${i===0?'#e8400c':'#1a7a5e'};font-size:.85rem">✓</span>`:`<span style="color:#333;font-size:.8rem">—</span>`}
+      </div>`).join('')}
+    </div>`;
+  });
+}
+
+// ── COUNTDOWN ────────────────────────────────────────────────────────────────
+function updateCountdown(){
+  const diff = LAUNCH - Date.now();
+  if(diff<=0) return;
+  const d=Math.floor(diff/(1000*60*60*24));
+  const h=Math.floor((diff/(1000*60*60))%24);
+  const m=Math.floor((diff/(1000*60))%60);
+  const s=Math.floor((diff/1000)%60);
+  document.getElementById("cd-d").textContent=String(d).padStart(2,"0");
+  document.getElementById("cd-h").textContent=String(h).padStart(2,"0");
+  document.getElementById("cd-m").textContent=String(m).padStart(2,"0");
+  document.getElementById("cd-s").textContent=String(s).padStart(2,"0");
+}
+
+// ── UPDATE UI AFTER SIGNUP ───────────────────────────────────────────────────
+function updateUI(){
+  const el = document.getElementById("signup-count");
+  el.textContent = signups;
+  el.classList.add("pulse");
+  setTimeout(()=>el.classList.remove("pulse"),500);
+  document.getElementById("cta-num").textContent = signups;
+
+  if(signups<50){
+    const left=50-signups;
+    const pct=Math.round((signups/50)*100);
+    document.getElementById("spots-left").textContent=`${left} Founding Member spots left`;
+    document.getElementById("progress-label").textContent="Progress to 🥇 Founding Member";
+    document.getElementById("progress-count").textContent=`${signups}/50`;
+    document.getElementById("progress-count").style.color="#c8a84b";
+    document.getElementById("progress-fill").style.width=pct+"%";
+    document.getElementById("progress-fill").style.background="#c8a84b";
+    document.getElementById("spots-strong").textContent=left+" spots";
+    document.getElementById("spots-strong").style.color="#c8a84b";
+    document.getElementById("founding-count").textContent=left+" left";
+    document.getElementById("founding-bar").style.width=pct+"%";
+    document.getElementById("form-tag").textContent="🥇 Claim Your Founding Member Spot";
+    document.getElementById("form-tag").style.color="#c8a84b";
+    document.getElementById("submit-btn").textContent="Claim Founding Member Spot →";
+    document.getElementById("cta-p").textContent=`${signups} brands have already signed up. Only ${left} Founding Member spots left.`;
+  } else if(signups<100){
+    const left=100-signups;
+    const pct=Math.round(((signups-50)/50)*100);
+    document.getElementById("spots-left").textContent=`${left} Early Adopter spots left`;
+    document.getElementById("progress-label").textContent="Progress to ⚡ Early Adopter";
+    document.getElementById("progress-count").textContent=`${signups}/100`;
+    document.getElementById("progress-count").style.color="#e8400c";
+    document.getElementById("progress-fill").style.width=pct+"%";
+    document.getElementById("progress-fill").style.background="#e8400c";
+    document.getElementById("spots-strong").textContent=left+" spots";
+    document.getElementById("spots-strong").style.color="#e8400c";
+    document.getElementById("form-tag").textContent="⚡ Claim Your Early Adopter Spot";
+    document.getElementById("form-tag").style.color="#e8400c";
+    document.getElementById("submit-btn").textContent="Claim Early Adopter Spot →";
+    document.getElementById("cta-p").textContent=`${signups} brands have already signed up. Only ${left} Early Adopter spots left.`;
+  } else {
+    document.getElementById("spots-left").textContent="All milestone rewards claimed";
+    document.getElementById("form-tag").textContent="Join the Waitlist";
+    document.getElementById("submit-btn").textContent="Join the Waitlist →";
+    document.getElementById("cta-p").textContent=`${signups} brands have already signed up. Join the waitlist for launch access.`;
+  }
+}
+
+// ── FORM SUBMIT ──────────────────────────────────────────────────────────────
+async function handleSubmit(){
+  const name  = document.getElementById("input-name").value.trim();
+  const email = document.getElementById("input-email").value.trim();
+  const errEl = document.getElementById("form-error");
+  const btn   = document.getElementById("submit-btn");
+
+  if(!name){ errEl.textContent="Please enter your name."; errEl.style.display="block"; return; }
+  if(!email.includes("@")){ errEl.textContent="Please enter a valid email."; errEl.style.display="block"; return; }
+  errEl.style.display="none";
+
+  btn.textContent="Sending...";
+  btn.style.background="#555";
+  btn.disabled=true;
+
+  try{
+    const res = await fetch("https://api.convertkit.com/v3/forms/9492985/subscribe",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        api_key:"clT1-_9Z2ZUKESeFRjRG9g",
+        first_name:name,
+        email:email,
+      })
+    });
+    const data = await res.json();
+    if(data.subscription||data.subscriber){
+      signups++;
+      updateUI();
+      // Show success
+      document.getElementById("form-section").style.display="none";
+      const s = document.getElementById("success-section");
+      s.style.display="block";
+      const num=signups;
+      let msg=`You're signup #${num}. `;
+      if(num<=50) msg+="You've locked in your Founding Member rewards.";
+      else if(num<=100) msg+="You've locked in your Early Adopter rewards.";
+      else msg+="You're on the waitlist — we'll notify you at launch.";
+      document.getElementById("success-msg").textContent=msg;
+    } else {
+      errEl.textContent="Something went wrong. Please try again.";
+      errEl.style.display="block";
+      btn.textContent="Try Again";
+      btn.style.background="#e8400c";
+      btn.disabled=false;
+    }
+  } catch(err){
+    errEl.textContent="Connection error. Please check your internet and try again.";
+    errEl.style.display="block";
+    btn.textContent="Try Again";
+    btn.style.background="#e8400c";
+    btn.disabled=false;
+  }
+}
+
+// ── RESPONSIVE TABLE ─────────────────────────────────────────────────────────
+function checkMobile(){
+  const isMobile = window.innerWidth<768;
+  document.getElementById("desktop-table").style.display=isMobile?"none":"block";
+  document.getElementById("mobile-table").style.display=isMobile?"block":"none";
+  // Nav status
+  const ns=document.querySelector(".nav-status-text");
+  if(ns) ns.style.display=isMobile?"none":"inline";
+}
+
+// ── INIT ────────────────────────────────────────────────────────────────────
+buildTables();
+updateCountdown();
+setInterval(updateCountdown,1000);
+checkMobile();
+window.addEventListener("resize",checkMobile);
+</script>
+</body>
+</html>
